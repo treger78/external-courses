@@ -1,7 +1,8 @@
 function insertStr(str, insStr, wordPosition) {
   const newStr = str.trim().split(' ');
-  newStr.splice(wordPosition + 1, 0, insStr);
-  return newStr.join(' ');
+  const newInsStr = insStr.trim().split(' ');
+
+  return [...newStr.slice(0, wordPosition + 1), ...newInsStr, ...newStr.slice(wordPosition + 1)].join(' ');
 }
 
 module.exports = insertStr;
