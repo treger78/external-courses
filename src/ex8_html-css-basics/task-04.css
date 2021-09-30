@@ -1,0 +1,33 @@
+@font-face {
+  font-family: "Bitstream Vera Serif Bold";
+  src: url("https://mdn.mozillademos.org/files/2468/VeraSeBd.ttf");
+}
+
+.listWithBackgroundImg {
+  background: url("https://s11.stc.all.kpcdn.net/russia/wp-content/uploads/2020/08/reki-rossii-oblozhka-2600x830.jpg") no-repeat;
+  color: rgb(100%, 100%, 100%);
+  max-width: 35em;
+}
+
+img {
+  height: auto;
+  max-width: 15rem;
+}
+
+pre {
+  background-color: #deb887;
+  font-family: "Bitstream Vera Serif Bold", serif;
+}
+
+table {
+  max-width: 250px;
+  text-transform: uppercase;
+}
+
+.paragraphWithBreakLines {
+  letter-spacing: 2px;
+}
+
+.longParagraph {
+  text-align: center;
+}

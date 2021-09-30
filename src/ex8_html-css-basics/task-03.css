@@ -1,0 +1,15 @@
+div {
+  margin: 1rem;
+}
+
+.first {
+  border: 1px solid black;
+}
+
+.second {
+  outline: 1px solid black;
+}
+
+.third {
+  box-shadow: 0 0 0 1px black;
+}
