@@ -2,7 +2,8 @@ function showObj(obj) {
   Object.keys(obj).forEach((key) => {
     console.log(`${key}: ${obj[key]}`);
   });
-  return 0;
+
+  return undefined;
 }
 
 module.exports = showObj;
