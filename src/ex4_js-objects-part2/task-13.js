@@ -1,5 +1,5 @@
 function getRandomVal() {
-  return Math.floor(0 + Math.random() * (100 + 1 - 0));
+  return Math.floor(Math.random() * 101);
 }
 
 module.exports = getRandomVal;
