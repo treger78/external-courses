@@ -1,0 +1,39 @@
+body {
+  padding: 30px;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 75% 25%;
+}
+
+header {
+  background: lightblue;
+  grid-column: 1 / 3;
+}
+
+section {
+  background: lightgreen;
+}
+
+article {
+  background: white;
+  margin: 0 0 1rem 0;
+}
+
+aside {
+  background: pink;
+}
+
+header, article, section, .module {
+  padding: 1rem;
+}
+
+@media screen and (max-width: 810px) {
+  main {
+    grid-template-columns: 1fr;
+  }
+  aside {
+    grid-column: 1 / 3;
+  }
+}
