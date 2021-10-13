@@ -7,7 +7,7 @@
     <title>task-02</title>
   </head>
   <body>
-    <form method="post" action="/task-02.html">
+    <form method="post" action="http://httpbin.org/post">
       <fieldset>
         <legend>Personal data</legend>
         <label>
@@ -70,7 +70,7 @@
             </optgroup>
             <optgroup label="Finance">
               <option value="economicPlanning">Economic Planning</option>
-              <option value="managmentAccounting">Managment accounting</option>
+              <option value="managmentAccounting">Management accounting</option>
               <option value="BudgetingAndPlanning">
                 Budgeting and planning
               </option>
@@ -89,9 +89,11 @@
           />
         </label>
         <label>
-          <textarea name="about" autocomplete="off">
-            Tell us about yourself...
-          </textarea>
+          <textarea
+            name="about"
+            placeholder="Tell us about yourself..."
+            autocomplete="off"
+          ></textarea>
         </label>
       </fieldset>
       <fieldset>
@@ -106,12 +108,14 @@
           Phone <input type="tel" name="phone" autocomplete="off" />
         </label>
       </fieldset>
-      <label>
+      <label class="password">
         Password
         <input type="password" name="password" autocomplete="off" required />
       </label>
-      <button type="submit">Отправить</button>
-      <button type="reset">Сбросить</button>
+      <label class="buttons">
+        <button type="submit">Отправить</button>
+        <button type="reset">Сбросить</button>
+      </label>
     </form>
   </body>
 </html>

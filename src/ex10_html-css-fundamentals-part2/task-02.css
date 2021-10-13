@@ -4,11 +4,16 @@
 }
 
 body {
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 14pt;
+  margin: 1rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
 }
 
 fieldset {
@@ -19,12 +24,43 @@ fieldset {
   width: 75vw;
 }
 
-input {
-  margin-top: 0.5%;
-  margin-bottom: 0.5%;
+input, select, textarea {
+  margin-top: 1%;
+  margin-bottom: 1%;
 }
 
 hr {
   margin-top: 1vh;
   margin-bottom: 1vh;
+}
+
+input[name="age"] {
+  max-width: 7%;
+}
+
+select[name="title"] {
+  height: 8.5rem;
+}
+
+select[name="title"] option {
+  padding-left: 1rem;
+}
+
+optgroup {
+  font-style: normal;
+}
+
+textarea {
+  white-space: normal;
+  width: 27vw;
+  height: 9.5rem;
+}
+
+.password, .buttons {
+  margin-left: 0.8vw;
+}
+
+button {
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
 }
