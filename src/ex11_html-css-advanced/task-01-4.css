@@ -1,0 +1,56 @@
+#infiniteAnimation {
+  width: 0;
+  height: 0;
+  visibility: hidden;
+  animation: showInfiniteAnimation 0s 6s forwards;
+}
+
+@keyframes showInfiniteAnimation {
+  to {
+    width: auto;
+    height: auto;
+    visibility: visible;
+  }
+}
+
+#block {
+  width: 6rem;
+  height: 6rem;
+  animation: circleToSquare 20s 6s forwards;
+}
+
+@keyframes circleToSquare {
+  0% {
+    width: 6rem;
+    height: 6rem;
+    clip-path: circle(50%);
+    background: linear-gradient(skyblue, brown);
+  }
+  15% {
+    clip-path: none;
+    background: linear-gradient(skyblue, brown);
+  }
+  30% {
+    width: 6rem;
+    height: 6rem;
+    background: linear-gradient(orange, limegreen);
+    transform: skew(0);
+  }
+  45% {
+    width: 8rem;
+    height: 8rem;
+    transform: skew(15deg, 15deg);
+  }
+  60% {
+    background: linear-gradient(orange, limegreen);
+    transform: rotateX(180deg);
+  }
+  75% {
+    clip-path: none;
+    background: linear-gradient(gray, pink);
+  }
+  100% {
+    background: linear-gradient(gray, pink);
+    clip-path: circle(50%);
+  }
+}
