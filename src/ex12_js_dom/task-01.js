@@ -24,16 +24,6 @@ for (let i = 0; i < imagesArray.length; i += 1) {
 
 let slideIndex = 1;
 
-/*
-const totalSlidesNumber = document.getElementsByClassName('totalSlides');
-const currentSlideNumber = document.getElementsByClassName('currentSlide');
-
-for (let i = 0; i < totalSlidesNumber.length; i += 1) {
-  totalSlidesNumber[i].innerHTML = totalSlidesNumber.length;
-  currentSlideNumber[i].innerHTML = i + 1;
-}
-*/
-
 function showSlides(n) {
   const slides = document.getElementsByClassName('slide');
 
