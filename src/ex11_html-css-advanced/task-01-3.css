@@ -51,36 +51,27 @@
 
 @keyframes jumpingBall {
   0% {
-    transform: translateY(-10rem);
+    transform: translateX(-6rem);
   }
   10% {
-    transform: translateY(0rem);
+    transform: translateX(6rem);
   }
   20% {
-    transform: translateY(-8rem);
+    transform: translateX(-6rem);
   }
   30% {
-    transform: translateY(0rem);
+    transform: translateX(6rem);
   }
   40% {
-    transform: translateY(-6rem);
+    transform: translateX(-6rem);
   }
   50% {
-    transform: translateY(0rem);
+    transform: translateX(6rem);
   }
   60% {
-    transform: translateY(-4rem);
-  }
-  70% {
-    transform: translateY(0rem);
-  }
-  80% {
-    transform: translateY(-2rem);
-  }
-  90% {
-    transform: translateY(0rem);
+    transform: translateX(-6rem);
   }
   100% {
-    transform: translateY(0rem);
+    transform: translateX(0rem);
   }
 }

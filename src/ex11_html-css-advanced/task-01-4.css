@@ -16,6 +16,7 @@
 #block {
   width: 6rem;
   height: 6rem;
+  box-shadow: 0 -150px 70px -120px skyblue inset, 0 -250px 70px -120px brown inset;
   animation: circleToSquare 20s 6s forwards;
 }
 
@@ -24,16 +25,15 @@
     width: 6rem;
     height: 6rem;
     clip-path: circle(50%);
-    background: linear-gradient(skyblue, brown);
   }
   15% {
     clip-path: none;
-    background: linear-gradient(skyblue, brown);
+    box-shadow: 0 -150px 70px -120px skyblue inset, 0 -250px 70px -120px brown inset;
   }
   30% {
     width: 6rem;
     height: 6rem;
-    background: linear-gradient(orange, limegreen);
+    box-shadow: 0 -150px 70px -120px orange inset, 0 -250px 70px -120px limegreen inset;
     transform: skew(0);
   }
   45% {
@@ -42,15 +42,15 @@
     transform: skew(15deg, 15deg);
   }
   60% {
-    background: linear-gradient(orange, limegreen);
     transform: rotateX(180deg);
+    box-shadow: 0 -150px 70px -120px orange inset, 0 -250px 70px -120px limegreen inset;
   }
   75% {
     clip-path: none;
-    background: linear-gradient(gray, pink);
+    box-shadow: 0 -150px 70px -120px gray inset, 0 -250px 70px -120px pink inset;
   }
   100% {
-    background: linear-gradient(gray, pink);
+    box-shadow: 0 -150px 70px -120px gray inset, 0 -250px 70px -120px pink inset;
     clip-path: circle(50%);
   }
 }
