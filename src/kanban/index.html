@@ -13,40 +13,22 @@
     <title>Awesome Kanban Board</title>
   </head>
   <body>
-    <header id="header">
-      <a id="appLogo" href="index.html">
-        <div id="logo"><img src="public/assets/images/logo.png" /></div>
-        <div>Awesome Kanban Board</div>
-      </a>
-      <div id="headerRightItems">
-        <div>
-          <button>
-            <img src="public/assets/images/add.png" />Create new list
-          </button>
-        </div>
-        <div id="userMenu">
-          <div>
-            <div id="userAvatar">
-              <img src="public/assets/images/user-avatar.png" />
-            </div>
-            <div id="arrowDown">></div>
-          </div>
-        </div>
-      </div>
-    </header>
+    <header id="header"></header>
     <main>
       <div>Here will be main content</div>
     </main>
-    <footer id="footer">
-      <div id="footerStatusTasks">
-        <div>Active tasks: <span id="activeTasks"></span></div>
-        <div>Finished tasks: <span id="finishedTasks"></span></div>
-      </div>
-      <div>Kanban board by Ilia Pustograev, 2021</div>
-    </footer>
+    <footer id="footer"></footer>
+    <script
+      type="text/javascript"
+      src="public/scripts/components/header.js"
+    ></script>
     <script
       type="text/javascript"
       src="public/scripts/dropdownUserMenu.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="public/scripts/components/footer.js"
     ></script>
   </body>
 </html>
