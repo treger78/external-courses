@@ -1,21 +1,9 @@
-* {
-  margin: 0;
-  padding: 0;
-  font-family: 'Roboto', sans-serif;
-}
-
-body {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-}
-
-header, header button, #appLogo, #headerRightItems, #userMenu, footer, #statusTasks {
+header, header button, #appLogo, #headerRightItems, #userMenu {
   display: flex;
   align-items: center;
 }
 
-header, footer {
+header {
   flex-wrap: wrap;
   justify-content: space-between;
   min-height: 55px;
@@ -74,39 +62,6 @@ header button {
   transform: rotate(90deg);
 }
 
-#dropdowUserMenu {
-  display: flex;
-  flex-direction: column;
-  background-color: #0067A3;
-  font-size: 16pt;
-  position: relative;
-  top: 1rem;
-  left: 0.5rem;
-  padding: 0.5rem;
-}
-
-#dropdowUserMenu a {
-  text-decoration: none;
-  color: #ffffff;
-}
-
-#dropdowUserMenu a:hover {
-  opacity: 80%;
-}
-
 header button, #appLogo, #userAvatar, #arrowDown {
   cursor: pointer;
-}
-
-footer {
-  font-size: 18px;
-  flex-shrink: 0;
-}
-
-#statusTasks div {
-  margin-left: 3rem;
-}
-
-main {
-  flex-grow: 1;
 }

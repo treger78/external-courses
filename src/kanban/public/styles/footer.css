@@ -1,0 +1,23 @@
+footer, #footerStatusTasks {
+  display: flex;
+  align-items: center;
+}
+
+footer {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  min-height: 55px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  background-color: #0067A3;
+  color: #ffffff;
+}
+
+footer {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+#footerStatusTasks div {
+  margin-left: 3rem;
+}

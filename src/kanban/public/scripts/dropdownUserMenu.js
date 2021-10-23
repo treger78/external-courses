@@ -9,12 +9,14 @@ function generateDropdownUserMenu() {
   userMenu.insertAdjacentHTML(
     'beforeend',
     `
-        <nav id="dropdowUserMenu">
-          <a href="">My account</a>
-          <a href="">My tasks</a>
-          <a href="">Log out</a>
-        </nav>
-      `,
+      <nav id="dropdowUserMenu">
+        <ul>
+          <li><a href="">My account</a></li>
+          <li><a href="">My tasks</a></li>
+          <li><a href="">Log out</a></li>
+        </ul>
+      </nav>
+    `,
   );
 
   isActiveMenu = true;
