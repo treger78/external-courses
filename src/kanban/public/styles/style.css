@@ -4,6 +4,12 @@
   font-family: 'Roboto', sans-serif;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
 header, header button, #appLogo, #headerRightItems, #userMenu, footer, #statusTasks {
   display: flex;
   align-items: center;
@@ -21,6 +27,7 @@ header, footer {
 
 header {
   font-size: 28px;
+  flex-shrink: 0;
 }
 
 #appLogo {
@@ -48,9 +55,11 @@ header button {
 }
 
 #userMenu {
-  width: 4rem;
   height: 40px;
-  justify-content: space-between;
+}
+
+#userMenu div:nth-child(1) {
+  display: flex;
 }
 
 #userAvatar {
@@ -65,14 +74,39 @@ header button {
   transform: rotate(90deg);
 }
 
+#dropdowUserMenu {
+  display: flex;
+  flex-direction: column;
+  background-color: #0067A3;
+  font-size: 16pt;
+  position: relative;
+  top: 1rem;
+  left: 0.5rem;
+  padding: 0.5rem;
+}
+
+#dropdowUserMenu a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+#dropdowUserMenu a:hover {
+  opacity: 80%;
+}
+
 header button, #appLogo, #userAvatar, #arrowDown {
   cursor: pointer;
 }
 
 footer {
   font-size: 18px;
+  flex-shrink: 0;
 }
 
 #statusTasks div {
   margin-left: 3rem;
+}
+
+main {
+  flex-grow: 1;
 }
