@@ -28,6 +28,14 @@ createNewListItem.addEventListener('click', () => {
     const listName = document.getElementById('listName').value;
     const main = document.getElementById('main');
 
+    /*
+    if (listName === '' || listName === undefined) {
+      // eslint-disable-next-line no-alert
+      alert('Enter list name!');
+      return null;
+    }
+    */
+
     main.insertAdjacentHTML(
       'beforeend',
       `
