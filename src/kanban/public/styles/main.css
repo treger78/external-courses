@@ -1,6 +1,5 @@
 @import "header.css";
 @import "dropdownUserMenu.css";
-@import "createNewList.css";
 @import "list.css";
 @import "footer.css";
 * {
@@ -20,4 +19,5 @@ main {
   flex-grow: 1;
   padding: 1.5rem;
   overflow-x: scroll;
+  background-color: #007ac0;
 }
