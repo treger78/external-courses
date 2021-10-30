@@ -3,7 +3,7 @@ const lists = [
     title: 'Backlog', // заголовок блока
     tasks: [ // массив задач
       {
-        id: 'task1',
+        id: 'BacklogTask0',
         name: 'Sprint bugfix',
       },
     ],
@@ -13,15 +13,15 @@ const lists = [
     title: 'Ready',
     tasks: [
       {
-        id: 'task1',
+        id: 'ReadyTask0',
         name: 'Shop bug1',
       },
       {
-        id: 'task2',
+        id: 'ReadyTask1',
         name: 'Shop bug2',
       },
       {
-        id: 'task2',
+        id: 'ReadyTask2',
         name: 'Shop bug3',
       },
     ],
@@ -31,7 +31,7 @@ const lists = [
     title: 'In Progress',
     tasks: [
       {
-        id: 'task1',
+        id: 'ProgressTask0',
         name: 'Auth bugfix',
       },
     ],
@@ -41,7 +41,7 @@ const lists = [
     title: 'Finished',
     tasks: [
       {
-        id: 'task1',
+        id: 'FinishedTask0',
         name: 'Main page bugfix',
       },
     ],
@@ -51,138 +51,115 @@ const lists = [
 const lastListsLength = lists.length;
 const main = document.getElementById('main');
 
-for (let i = 0; i < lastListsLength; i += 1) {
-  main.insertAdjacentHTML(
-    'beforeend',
-    `
-      <div class="list">
-        <div class="listHeader">
-          <div class="listName">${lists[i].title}</div>
-          <div class="listMenu">•••</div>
+function initPrimaryLists(_lastListsLength, _main, _lists) {
+  for (let i = 0; i < _lastListsLength; i += 1) {
+    _main.insertAdjacentHTML(
+      'beforeend',
+      `
+        <div class="list">
+          <div class="listHeader">
+            <div class="listName">${_lists[i].title}</div>
+            <div class="listMenu">•••</div>
+          </div>
+          <div class="listTasks"></div>
+          <div class="addCard">
+            <button class="addCardButton"><img src="public/assets/images/add-card.png" /> Add card</button>
+          </div>
         </div>
-        <div class="listTasks"></div>
-        <div class="addCard">
-          <button class="addCardButton"><img src="public/assets/images/add-card.png" /> Add card</button>
-        </div>
-      </div>
-    `,
-  );
+      `,
+    );
 
-  const listTasks = document.getElementsByClassName('listTasks')[i];
+    const listTasks = document.getElementsByClassName('listTasks')[i];
 
-  for (let j = 0; j < lists[i].tasks.length; j += 1) {
+    for (let j = 0; j < _lists[i].tasks.length; j += 1) {
+      listTasks.insertAdjacentHTML(
+        'beforeend',
+        `
+          <div class="task">${_lists[i].tasks[j].name}</div>
+        `,
+      );
+    }
+  }
+}
+
+initPrimaryLists(lastListsLength, main, lists);
+
+function disableAddCardBtn(_lastListsLength, _lists) {
+  for (let i = 0; i < _lastListsLength; i += 1) {
+    if (_lists[i].tasks.length < 1) {
+      const addCardButton = document.getElementsByClassName('addCardButton')[i + 1];
+      addCardButton.setAttribute('disabled', 'disabled');
+    }
+  }
+}
+
+disableAddCardBtn(lastListsLength, lists);
+
+let backlogIndex = 0;
+
+function findBacklogIndex(_lists) {
+  for (let i = 0; i < _lists.length; i += 1) {
+    if (_lists[i].title === 'Backlog') {
+      return i;
+    }
+  }
+  return 0;
+}
+
+backlogIndex = findBacklogIndex(lists);
+
+function insertBacklogTasksFromStorage(backlogIndexParam, _lists) {
+  const listTasksItemPosition = 1;
+  const listTasks = main.children[backlogIndexParam].children[listTasksItemPosition];
+
+  for (let i = 0; i < localStorage.length; i += 1) {
     listTasks.insertAdjacentHTML(
       'beforeend',
       `
-        <div class="task">${lists[i].tasks[j].name}</div>
+        <div class="task">${localStorage.getItem(`BacklogTask${_lists[backlogIndexParam].tasks.length + i}`)}</div>
       `,
     );
   }
 }
 
-for (let i = 0; i < lastListsLength; i += 1) {
-  if (lists[i].tasks.length < 1) {
-    const addCardButton = document.getElementsByClassName('addCardButton')[i + 1];
-    addCardButton.setAttribute('disabled', 'disabled');
-  }
-}
-
-let backlogIndex = 0;
-
-for (let i = 0; i < lists.length; i += 1) {
-  if (lists[i].title === 'Backlog') {
-    backlogIndex = i;
-  }
-}
+insertBacklogTasksFromStorage(backlogIndex, lists);
 
 const backlogAddCardBtn = document.getElementsByClassName('addCard')[backlogIndex];
 
 backlogAddCardBtn.addEventListener('click', () => {
   const listTasks = document.getElementsByClassName('listTasks')[backlogIndex];
-  const newTaskName = document.createElement('input');
+  const inputTaskName = document.createElement('input');
 
-  newTaskName.className = 'task';
+  inputTaskName.className = 'task';
 
-  listTasks.append(newTaskName);
+  listTasks.append(inputTaskName);
 
-  newTaskName.focus();
-});
+  inputTaskName.focus();
 
-/*
-function insertList(listName, listTasks) {
-  main.insertAdjacentHTML(
-    'beforeend',
-    `
-      <div class="list">
-        <div class="listHeader">
-          <div class="listName">${listName}</div>
-          <div class="listMenu">•••</div>
-        </div>
-        <div class="listTasks">
-          <div class="task">${listTasks}</div>
-        </div>
-        <div class="addCard">
-          <button><img src="public/assets/images/add-card.png" /> Add card</button>
-        </div>
-      </div>
-    `,
-  );
-}
+  inputTaskName.addEventListener('blur', () => {
+    const inputTaskNameValue = inputTaskName.value.trim();
 
-insertList(lists[0].title, lists[0].tasks[0].name);
+    if (inputTaskNameValue.replace(/\s+/g, '') === '' || inputTaskNameValue === undefined) {
+      alert('Enter task name!');
 
-const addCardButtons = document.getElementsByClassName('addCard');
+      inputTaskName.remove();
+    }
 
-addCardButtons.forEach((btn) => {
-  btn.addEventListener('click', () => {
+    const backlogTasksLength = lists[backlogIndex].tasks.length;
 
+    localStorage.setItem(`BacklogTask${backlogTasksLength + localStorage.length}`, `${inputTaskNameValue}`);
+
+    const newTask = document.createElement('div');
+
+    newTask.className = 'task';
+    newTask.innerText = inputTaskNameValue;
+
+    inputTaskName.replaceWith(newTask);
+  });
+
+  inputTaskName.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      inputTaskName.blur();
+    }
   });
 });
-*/
-
-/*
-
-function mutationCallback(lastListsLength) {
-  if (lastListsLength !== lists.length) {
-
-  }
-}
-
-const observer = new MutationObserver(callback);
-*/
-
-/*
-const createNewListItem = document.getElementById('createNewListItem');
-
-createNewListItem.addEventListener('click', () => {
-  lists.unshift(
-    {
-      title: '',
-      tasks: [
-        {
-          id: '',
-          name: '',
-        },
-      ],
-    },
-  );
-
-  const main = document.getElementById('main');
-
-  main.insertAdjacentHTML(
-    'beforeend',
-    `
-      <div class="list">
-        <div class="listHeader">
-          <input class="listName" type="text" autocomplete="off" />
-          <div class="listMenu">•••</div>
-        </div>
-        <div class="listTasks"></div>
-        <div class="addCard">
-          <button><img src="public/assets/images/add-card.png" /> Add card</button>
-        </div>
-      </div>
-    `,
-  );
-});
-*/

@@ -65,3 +65,9 @@ header #createNewListItem>button {
 header button, #appLogo, #userAvatar, #arrowDown {
   cursor: pointer;
 }
+
+@media screen and (max-width: 710px) {
+  header {
+    justify-content: space-around;
+  }
+}

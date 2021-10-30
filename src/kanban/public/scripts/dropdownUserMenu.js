@@ -1,5 +1,4 @@
 const userMenu = document.getElementById('userMenu');
-const userAvatar = document.getElementById('userAvatar');
 const arrowDown = document.getElementById('arrowDown');
 let isActiveMenu = false;
 
@@ -30,15 +29,7 @@ function removeDropdownUserMenu() {
   isActiveMenu = false;
 }
 
-arrowDown.addEventListener('click', () => {
-  if (!isActiveMenu) {
-    generateDropdownUserMenu();
-  } else {
-    removeDropdownUserMenu();
-  }
-});
-
-userAvatar.addEventListener('click', () => {
+userMenu.addEventListener('click', () => {
   if (!isActiveMenu) {
     generateDropdownUserMenu();
   } else {

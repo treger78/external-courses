@@ -21,3 +21,9 @@ footer {
 #footerStatusTasks div {
   margin-left: 3rem;
 }
+
+@media screen and (max-width: 710px) {
+  footer {
+    justify-content: space-around;
+  }
+}

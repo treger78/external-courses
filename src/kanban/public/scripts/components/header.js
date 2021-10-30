@@ -8,12 +8,10 @@ header.innerHTML = `
   <div id="headerRightItems">
     <div id="createNewListItem"></div>
     <div id="userMenu">
-      <div>
-        <div id="userAvatar">
-          <img src="public/assets/images/user-avatar.png" />
-        </div>
-        <div id="arrowDown">></div>
+      <div id="userAvatar">
+        <img src="public/assets/images/user-avatar.png" />
       </div>
+      <div id="arrowDown">></div>
     </div>
   </div>
 `;
