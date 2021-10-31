@@ -56,15 +56,17 @@ function initPrimaryLists(_lastListsLength, _main, _lists) {
     _main.insertAdjacentHTML(
       'beforeend',
       `
-        <div class="list">
-          <div class="listHeader">
-            <div class="listName">${_lists[i].title}</div>
-            <div class="listMenu">•••</div>
-          </div>
-          <div class="listTasks"></div>
-          <div class="addCard">
-            <button class="addCardButton"><img src="public/assets/images/add-card.png" /> Add card</button>
-          </div>
+        <div class="listWrapper">
+          <div class="list">
+            <div class="listHeader">
+              <div class="listName">${_lists[i].title}</div>
+              <div class="listMenu">•••</div>
+            </div>
+            <div class="listTasks"></div>
+            <div class="addCard">
+              <button class="addCardButton"><img src="public/assets/images/add-card.png" /> Add card</button>
+            </div>
+          <div>
         </div>
       `,
     );
@@ -110,7 +112,8 @@ backlogIndex = findBacklogIndex(lists);
 
 function insertBacklogTasksFromStorage(backlogIndexParam, _lists) {
   const listTasksItemPosition = 1;
-  const listTasks = main.children[backlogIndexParam].children[listTasksItemPosition];
+  const listTasks = main.children[backlogIndexParam].firstElementChild
+    .children[listTasksItemPosition];
 
   for (let i = 0; i < localStorage.length; i += 1) {
     listTasks.insertAdjacentHTML(
@@ -131,11 +134,13 @@ backlogAddCardBtn.addEventListener('click', () => {
   const inputTaskName = document.createElement('input');
 
   inputTaskName.className = 'task';
+  inputTaskName.style.border = 'none';
 
   listTasks.append(inputTaskName);
 
   inputTaskName.focus();
 
+  // eslint-disable-next-line consistent-return
   inputTaskName.addEventListener('blur', () => {
     const inputTaskNameValue = inputTaskName.value.trim();
 
@@ -143,6 +148,8 @@ backlogAddCardBtn.addEventListener('click', () => {
       alert('Enter task name!');
 
       inputTaskName.remove();
+
+      return null;
     }
 
     const backlogTasksLength = lists[backlogIndex].tasks.length;

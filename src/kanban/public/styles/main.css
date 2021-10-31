@@ -18,6 +18,23 @@ main {
   display: flex;
   flex-grow: 1;
   padding: 1.5rem;
-  overflow-x: scroll;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #CBCBCB #ffffff;
   background-color: #007ac0;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: #ffffff;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #CBCBCB;
 }

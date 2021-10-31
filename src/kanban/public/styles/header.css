@@ -32,6 +32,11 @@ header {
   margin-left: 0.5rem;
 }
 
+#headerRightItems {
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+}
+
 header #createNewListItem>button {
   justify-content: space-around;
   width: 11.3rem;
