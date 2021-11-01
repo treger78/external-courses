@@ -1,4 +1,4 @@
-const lists = [
+let lists = [
   {
     title: 'Backlog', // заголовок блока
     tasks: [ // массив задач
@@ -48,21 +48,29 @@ const lists = [
   },
 ];
 
-const lastListsLength = lists.length;
-const main = document.getElementById('main');
+function fillLocalStorage(_lists) {
+  return localStorage.setItem(_lists, JSON.stringify(_lists));
+}
 
-function initPrimaryLists(_lastListsLength, _main, _lists) {
-  for (let i = 0; i < _lastListsLength; i += 1) {
-    _main.insertAdjacentHTML(
+if (localStorage.length === 0) {
+  fillLocalStorage(lists);
+}
+
+function insertListsFromLocalStorage(_lists) {
+  const refreshedLists = JSON.parse(localStorage.getItem(_lists));
+  const main = document.getElementById('main');
+
+  for (let i = 0; i < refreshedLists.length; i += 1) {
+    main.insertAdjacentHTML(
       'beforeend',
       `
         <div class="listWrapper">
           <div class="list">
             <div class="listHeader">
-              <div class="listName">${_lists[i].title}</div>
+              <div class="listName">${refreshedLists[i].title}</div>
               <div class="listMenu">•••</div>
             </div>
-            <div class="listTasks"></div>
+            <ul class="listTasks"></ul>
             <div class="addCard">
               <button class="addCardButton"><img src="public/assets/images/add-card.png" /> Add card</button>
             </div>
@@ -73,60 +81,49 @@ function initPrimaryLists(_lastListsLength, _main, _lists) {
 
     const listTasks = document.getElementsByClassName('listTasks')[i];
 
-    for (let j = 0; j < _lists[i].tasks.length; j += 1) {
+    for (let j = 0; j < refreshedLists[i].tasks.length; j += 1) {
       listTasks.insertAdjacentHTML(
         'beforeend',
         `
-          <div class="task">${_lists[i].tasks[j].name}</div>
+          <li class="task">${refreshedLists[i].tasks[j].name}</li>
         `,
       );
     }
   }
+
+  return refreshedLists;
 }
 
-initPrimaryLists(lastListsLength, main, lists);
+lists = insertListsFromLocalStorage(lists);
 
-function disableAddCardBtn(_lastListsLength, _lists) {
-  for (let i = 0; i < _lastListsLength; i += 1) {
-    if (_lists[i].tasks.length < 1) {
+function disableAddCardBtn(_lists) {
+  const refreshedLists = JSON.parse(localStorage.getItem(_lists));
+
+  for (let i = 0; i < refreshedLists.length; i += 1) {
+    if (refreshedLists[i].tasks.length < 1) {
       const addCardButton = document.getElementsByClassName('addCardButton')[i + 1];
       addCardButton.setAttribute('disabled', 'disabled');
     }
   }
+
+  return refreshedLists;
 }
 
-disableAddCardBtn(lastListsLength, lists);
+lists = disableAddCardBtn(lists);
 
-let backlogIndex = 0;
+function findListIndex(_lists, _listName) {
+  const refreshedLists = JSON.parse(localStorage.getItem(_lists));
 
-function findBacklogIndex(_lists) {
-  for (let i = 0; i < _lists.length; i += 1) {
-    if (_lists[i].title === 'Backlog') {
+  for (let i = 0; i < refreshedLists.length; i += 1) {
+    if (refreshedLists[i].title === _listName) {
       return i;
     }
   }
-  return 0;
+
+  return null;
 }
 
-backlogIndex = findBacklogIndex(lists);
-
-function insertBacklogTasksFromStorage(backlogIndexParam, _lists) {
-  const listTasksItemPosition = 1;
-  const listTasks = main.children[backlogIndexParam].firstElementChild
-    .children[listTasksItemPosition];
-
-  for (let i = 0; i < localStorage.length; i += 1) {
-    listTasks.insertAdjacentHTML(
-      'beforeend',
-      `
-        <div class="task">${localStorage.getItem(`BacklogTask${_lists[backlogIndexParam].tasks.length + i}`)}</div>
-      `,
-    );
-  }
-}
-
-insertBacklogTasksFromStorage(backlogIndex, lists);
-
+const backlogIndex = findListIndex(lists, 'Backlog');
 const backlogAddCardBtn = document.getElementsByClassName('addCard')[backlogIndex];
 
 backlogAddCardBtn.addEventListener('click', () => {
@@ -152,11 +149,13 @@ backlogAddCardBtn.addEventListener('click', () => {
       return null;
     }
 
-    const backlogTasksLength = lists[backlogIndex].tasks.length;
+    const newTaskID = `BacklogTask${lists[backlogIndex].tasks.length}`;
 
-    localStorage.setItem(`BacklogTask${backlogTasksLength + localStorage.length}`, `${inputTaskNameValue}`);
+    lists[backlogIndex].tasks.push({ id: newTaskID, name: inputTaskNameValue });
 
-    const newTask = document.createElement('div');
+    fillLocalStorage(lists);
+
+    const newTask = document.createElement('li');
 
     newTask.className = 'task';
     newTask.innerText = inputTaskNameValue;
@@ -170,3 +169,81 @@ backlogAddCardBtn.addEventListener('click', () => {
     }
   });
 });
+
+const readyIndex = findListIndex(lists, 'Ready');
+const readyAddCardBtn = document.getElementsByClassName('addCard')[readyIndex];
+
+readyAddCardBtn.addEventListener('click', () => {
+  const listTasks = document.getElementsByClassName('listTasks')[readyIndex];
+  const dropdownTasks = document.createElement('select');
+
+  dropdownTasks.className = 'task';
+  dropdownTasks.style.border = 'none';
+  dropdownTasks.style.width = '16rem';
+  dropdownTasks.style.fontSize = '18px';
+  dropdownTasks.style.padding = '0.5rem';
+
+  dropdownTasks.insertAdjacentHTML(
+    'beforeend',
+    `
+      <option disabled selected>Select task</option>
+    `,
+  );
+
+  const previousList = document.getElementsByClassName('listTasks')[backlogIndex];
+  const previousListTasks = previousList.children;
+
+  for (let i = 0; i < previousListTasks.length; i += 1) {
+    dropdownTasks.insertAdjacentHTML(
+      'beforeend',
+      `
+        <option>${previousListTasks[i].textContent}</option>
+      `,
+    );
+  }
+
+  listTasks.append(dropdownTasks);
+
+  dropdownTasks.addEventListener('change', () => {
+    const newTaskName = dropdownTasks.value;
+    const listName = 'ReadyTask';
+    const newTaskID = `${listName}${lists[readyIndex].tasks.length}`;
+
+    lists[readyIndex].tasks.push({ id: newTaskID, name: newTaskName });
+
+    const newTask = document.createElement('li');
+
+    newTask.className = 'task';
+    newTask.innerText = newTaskName;
+
+    dropdownTasks.replaceWith(newTask);
+
+    for (let i = 0; i < previousListTasks.length; i += 1) {
+      if (lists[backlogIndex].tasks[i].name === newTaskName) {
+        lists[backlogIndex].tasks.splice(i, 1);
+
+        previousListTasks[i].remove();
+
+        fillLocalStorage(lists);
+
+        break;
+      }
+    }
+  });
+});
+
+/*
+const progressIndex = findListIndex(lists, 'In Progress');
+const progressAddCardBtn = document.getElementsByClassName('addCard')[progressIndex];
+
+progressAddCardBtn.addEventListener('click', () => {
+
+});
+
+const finishedIndex = findListIndex(lists, 'Finished');
+const finishedAddCardBtn = document.getElementsByClassName('addCard')[finishedIndex];
+
+finishedAddCardBtn.addEventListener('click', () => {
+
+});
+*/
