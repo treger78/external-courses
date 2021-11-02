@@ -176,36 +176,6 @@ backlogAddCardBtn.addEventListener('click', () => {
   });
 });
 
-function addTaskToListByNameAndRemoveFromPreviousList(_newTaskNameValue, _listName, listIndexParam,
-  _lists, _previousListTasks) {
-  const newTaskName = _newTaskNameValue.value;
-  const listName = _listName;
-  const newTaskID = `${listName}${_lists[listIndexParam].tasks.length}`;
-
-  _lists[listIndexParam].tasks.push({ id: newTaskID, name: newTaskName });
-
-  const newTask = document.createElement('li');
-
-  newTask.className = 'task';
-  newTask.innerText = newTaskName;
-
-  _newTaskNameValue.replaceWith(newTask);
-
-  for (let i = 0; i < _previousListTasks.length; i += 1) {
-    if (_lists[backlogIndex].tasks[i].name === newTaskName) {
-      _lists[backlogIndex].tasks.splice(i, 1);
-
-      _previousListTasks[i].remove();
-
-      fillLocalStorage(_lists);
-
-      return changeAddCardBtnState(_lists);
-    }
-  }
-
-  return _lists;
-}
-
 function createAndAppendDropdownTasks(targetListIndexParam, previousListIndexParam) {
   const listTasks = document.getElementsByClassName('listTasks')[targetListIndexParam];
   const dropdownTasks = document.createElement('select');
@@ -240,6 +210,36 @@ function createAndAppendDropdownTasks(targetListIndexParam, previousListIndexPar
   return { dropdownTasks, previousListTasks };
 }
 
+function addTaskToListByNameAndRemoveFromPreviousList(_newTaskNameValue, _listName, listIndexParam,
+  _lists, _previousListTasks, previousListIndexParam) {
+  const newTaskName = _newTaskNameValue.value;
+  const listName = _listName;
+  const newTaskID = `${listName}${_lists[listIndexParam].tasks.length}`;
+
+  _lists[listIndexParam].tasks.push({ id: newTaskID, name: newTaskName });
+
+  const newTask = document.createElement('li');
+
+  newTask.className = 'task';
+  newTask.innerText = newTaskName;
+
+  _newTaskNameValue.replaceWith(newTask);
+
+  for (let i = 0; i < _previousListTasks.length; i += 1) {
+    if (_lists[previousListIndexParam].tasks[i].name === newTaskName) {
+      _lists[previousListIndexParam].tasks.splice(i, 1);
+
+      _previousListTasks[i].remove();
+
+      fillLocalStorage(_lists);
+
+      return changeAddCardBtnState(_lists);
+    }
+  }
+
+  return _lists;
+}
+
 const readyIndex = findListIndex(lists, 'Ready');
 const readyAddCardBtn = document.getElementsByClassName('addCard')[readyIndex];
 
@@ -249,11 +249,10 @@ readyAddCardBtn.addEventListener('click', () => {
   const previousListTasks = obj.previousListTasks;
 
   dropdownTasks.addEventListener('change', () => {
-    lists = addTaskToListByNameAndRemoveFromPreviousList(dropdownTasks, 'ReadyTask', readyIndex, lists, previousListTasks);
+    lists = addTaskToListByNameAndRemoveFromPreviousList(dropdownTasks, 'ReadyTask', readyIndex, lists, previousListTasks, backlogIndex);
   });
 });
 
-/*
 const progressIndex = findListIndex(lists, 'In Progress');
 const progressAddCardBtn = document.getElementsByClassName('addCard')[progressIndex];
 
@@ -264,16 +263,20 @@ progressAddCardBtn.addEventListener('click', () => {
 
   dropdownTasks.addEventListener('change', () => {
     lists = addTaskToListByNameAndRemoveFromPreviousList(dropdownTasks, 'ProgressTask',
-      progressIndex, lists, previousListTasks);
+      progressIndex, lists, previousListTasks, readyIndex);
   });
 });
-*/
 
-/*
 const finishedIndex = findListIndex(lists, 'Finished');
 const finishedAddCardBtn = document.getElementsByClassName('addCard')[finishedIndex];
 
 finishedAddCardBtn.addEventListener('click', () => {
+  const obj = createAndAppendDropdownTasks(finishedIndex, progressIndex);
+  const dropdownTasks = obj.dropdownTasks;
+  const previousListTasks = obj.previousListTasks;
 
+  dropdownTasks.addEventListener('change', () => {
+    lists = addTaskToListByNameAndRemoveFromPreviousList(dropdownTasks, 'FinishedTask',
+      finishedIndex, lists, previousListTasks, progressIndex);
+  });
 });
-*/
