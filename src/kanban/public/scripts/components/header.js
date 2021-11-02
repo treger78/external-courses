@@ -6,16 +6,12 @@ header.innerHTML = `
     <div>Awesome Kanban Board</div>
   </a>
   <div id="headerRightItems">
-    <div>
-      <button>
-        <img src="public/assets/images/add.png" />Create new list
-      </button>
-    </div>
+    <div id="createNewListItem"></div>
     <div id="userMenu">
-        <div id="userAvatar">
-          <img src="public/assets/images/user-avatar.png" />
-        </div>
-        <div id="arrowDown">></div>
+      <div id="userAvatar">
+        <img src="public/assets/images/user-avatar.png" />
+      </div>
+      <div id="arrowDown">></div>
     </div>
   </div>
 `;
