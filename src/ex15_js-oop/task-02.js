@@ -14,12 +14,9 @@ class ElectricalDevice {
     this.isSwitched = false;
   }
 
-  getDeviceName() {
-    return this.deviceName;
-  }
-
   getPowerConsumption() {
-    return this.powerConsumption;
+    if (this.isSwitched) return this.powerConsumption;
+    return 0;
   }
 }
 
@@ -113,16 +110,6 @@ class Room {
   addDevice(deviceName) {
     this.devicesInRoom.push(deviceName);
   }
-
-  searchDeviceByName(deviceName) {
-    for (let i = 0; i < this.devicesInRoom.length; i += 1) {
-      if (this.devicesInRoom[i].deviceName === deviceName) {
-        return this.devicesInRoom[i];
-      }
-    }
-
-    return 'Not found!';
-  }
 }
 
 class Flat {
@@ -159,6 +146,29 @@ const indesitDS4160S = new Fridge('indesitDS4160S', 'Indesit', 188, true, false,
 const hpInkTank419 = new Printer('hpInkTank419', 'HP', 10, false, true, 'inkjet CISS printer', true, true);
 const hpInkTank319 = new Printer('hpInkTank319', 'HP', 10, false, false, 'inkjet CISS printer', true, true);
 
+const devices = [hp400G5, hpPavilionGaming, asusS300MA, candyCPMW2070S, zanussiFCS825C,
+  candySmartCS4, indesitDS4160S, hpInkTank419, hpInkTank319];
+
+function calculatePowerConsumption(_devices) {
+  let powerConsumption = 0;
+
+  for (let i = 0; i < _devices.length; i += 1) {
+    powerConsumption += _devices[i].getPowerConsumption();
+  }
+
+  return powerConsumption;
+}
+
+console.log(calculatePowerConsumption(devices));
+
+devices[devices.length - 1].turnOn();
+
+console.log(calculatePowerConsumption(devices));
+
+devices[devices.length - 1].turnOff();
+
+console.log(calculatePowerConsumption(devices));
+
 const livingRoom = new Room('livingRoom', []);
 const bedRoom = new Room('bedRoom', []);
 const kitchen = new Room('kitchen', []);
@@ -179,4 +189,4 @@ bathRoom.addDevice(zanussiFCS825C);
 
 const flatNumber1 = new Flat('flatNumber1', livingRoom, bedRoom, kitchen, bathRoom);
 
-console.log(flatNumber1);
+console.log(flatNumber1.searchDeviceByName('hpInkTank419'));
