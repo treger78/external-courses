@@ -1,0 +1,56 @@
+#infiniteAnimation {
+  width: 0;
+  height: 0;
+  visibility: hidden;
+  animation: showInfiniteAnimation 0s 6s forwards;
+}
+
+@keyframes showInfiniteAnimation {
+  to {
+    width: auto;
+    height: auto;
+    visibility: visible;
+  }
+}
+
+#block {
+  width: 6rem;
+  height: 6rem;
+  box-shadow: 0 -150px 70px -120px skyblue inset, 0 -250px 70px -120px brown inset;
+  animation: circleToSquare 20s 6s forwards;
+}
+
+@keyframes circleToSquare {
+  0% {
+    width: 6rem;
+    height: 6rem;
+    clip-path: circle(50%);
+  }
+  15% {
+    clip-path: none;
+    box-shadow: 0 -150px 70px -120px skyblue inset, 0 -250px 70px -120px brown inset;
+  }
+  30% {
+    width: 6rem;
+    height: 6rem;
+    box-shadow: 0 -150px 70px -120px orange inset, 0 -250px 70px -120px limegreen inset;
+    transform: skew(0);
+  }
+  45% {
+    width: 8rem;
+    height: 8rem;
+    transform: skew(15deg, 15deg);
+  }
+  60% {
+    transform: rotateX(180deg);
+    box-shadow: 0 -150px 70px -120px orange inset, 0 -250px 70px -120px limegreen inset;
+  }
+  75% {
+    clip-path: none;
+    box-shadow: 0 -150px 70px -120px gray inset, 0 -250px 70px -120px pink inset;
+  }
+  100% {
+    box-shadow: 0 -150px 70px -120px gray inset, 0 -250px 70px -120px pink inset;
+    clip-path: circle(50%);
+  }
+}

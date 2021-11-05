@@ -1,0 +1,77 @@
+#ballAndBlocks {
+  width: 0;
+  height: 0;
+  visibility: hidden;
+  animation: showBallAndBlocks 0s 2.5s forwards, hiddenBallAndBlocks 0s 6s forwards;
+}
+
+@keyframes showBallAndBlocks {
+  to {
+    width: auto;
+    height: auto;
+    visibility: visible;
+  }
+}
+
+@keyframes hiddenBallAndBlocks {
+  to {
+    width: 0;
+    height: 0;
+    visibility: hidden;
+  }
+}
+
+#ballWithTwoBlocks {
+  display: flex;
+}
+
+#ballWithTwoBlocks div {
+  margin: 3rem;
+}
+
+#ballWithTwoBlocks div:nth-child(1) {
+  width: 3rem;
+  height: 3rem;
+  background-color: yellowgreen;
+}
+
+#ballWithTwoBlocks div:nth-child(3) {
+  width: 3rem;
+  height: 3rem;
+  background-color: yellowgreen;
+}
+
+#ballWithTwoBlocks div:nth-child(2) {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background-color: brown;
+  animation: jumpingBall 3.5s 2.5s;
+}
+
+@keyframes jumpingBall {
+  0% {
+    transform: translateX(-6rem);
+  }
+  10% {
+    transform: translateX(6rem);
+  }
+  20% {
+    transform: translateX(-6rem);
+  }
+  30% {
+    transform: translateX(6rem);
+  }
+  40% {
+    transform: translateX(-6rem);
+  }
+  50% {
+    transform: translateX(6rem);
+  }
+  60% {
+    transform: translateX(-6rem);
+  }
+  100% {
+    transform: translateX(0rem);
+  }
+}
