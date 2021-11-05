@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="task-02.css" />
+    <title>task-02</title>
+  </head>
+  <body>
+    <form method="post" action="http://httpbin.org/post">
+      <fieldset>
+        <legend>Personal data</legend>
+        <label>
+          Second Name <input type="text" name="secondName" autocomplete="off" />
+        </label>
+        <label>
+          First Name <input type="text" name="firstName" autocomplete="off" />
+        </label>
+        <label>
+          Middle Name <input type="text" name="middleName" autocomplete="off" />
+        </label>
+        <label>
+          You are
+          <input type="radio" name="male" value="male" autocomplete="off" />
+          Male
+          <input type="radio" name="female" value="female" autocomplete="off" />
+          Female
+        </label>
+        <label>
+          Age
+          <input
+            type="number"
+            name="age"
+            min="18"
+            max="101"
+            autocomplete="off"
+          />
+        </label>
+        <label>
+          Country of Residence
+          <select name="country" autocomplete="off">
+            <option value="russia">Russia</option>
+            <option value="usa">USA</option>
+            <option value="finland">Finland</option>
+          </select>
+        </label>
+        <label>
+          City
+          <input type="radio" name="ryazan" value="ryazan" autocomplete="off" />
+          Ryazan
+          <input type="radio" name="moscos" value="moscow" autocomplete="off" />
+          Moscow
+        </label>
+        <label>
+          Photography
+          <input type="file" name="file" autocomplete="off" />
+        </label>
+        <hr />
+        <label>
+          Title
+          <select name="title" autocomplete="off" multiple>
+            <optgroup label="Technologies">
+              <option value="webMaster">Web Master</option>
+              <option value="DatabaseAdministrator">
+                Database Administrator
+              </option>
+              <option value="Computer-aidedDesign">
+                Computer-aided design
+              </option>
+            </optgroup>
+            <optgroup label="Finance">
+              <option value="economicPlanning">Economic Planning</option>
+              <option value="managmentAccounting">Management accounting</option>
+              <option value="BudgetingAndPlanning">
+                Budgeting and planning
+              </option>
+            </optgroup>
+          </select>
+        </label>
+        <label>
+          Salary
+          <input
+            type="range"
+            min="500"
+            max="5000"
+            step="1"
+            value="2500"
+            autocomplete="off"
+          />
+        </label>
+        <label>
+          <textarea
+            name="about"
+            placeholder="Tell us about yourself..."
+            autocomplete="off"
+          ></textarea>
+        </label>
+      </fieldset>
+      <fieldset>
+        <legend>Contact Information</legend>
+        <label>
+          Site <input type="text" name="site" autocomplete="off" />
+        </label>
+        <label>
+          Email <input type="email" name="email" autocomplete="off" />
+        </label>
+        <label>
+          Phone <input type="tel" name="phone" autocomplete="off" />
+        </label>
+      </fieldset>
+      <label class="password">
+        Password
+        <input type="password" name="password" autocomplete="off" required />
+      </label>
+      <label class="buttons">
+        <button type="submit">Отправить</button>
+        <button type="reset">Сбросить</button>
+      </label>
+    </form>
+  </body>
+</html>

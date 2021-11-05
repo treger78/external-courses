@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+div {
+  margin: 1rem;
+}
+
+img {
+  width: 220px;
+  height: 220px;
+}
+
+.example1 {
+  border-radius: 50%;
+}
+
+.example2 {
+  shape-outside: ellipse(100px 200px at 50% 50%);
+  clip-path: ellipse(100px 200px at 50% 50%);
+}
