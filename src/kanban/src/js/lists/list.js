@@ -1,5 +1,6 @@
 // eslint-disable-next-line import/extensions
 let lists = await import('./listsArray.js');
+
 lists = lists.listsArray;
 
 function fillLocalStorage(_lists) {

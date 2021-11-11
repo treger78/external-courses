@@ -37,16 +37,6 @@ header {
   margin-top: 0.5rem;
 }
 
-header #createNewListItem>button {
-  justify-content: space-around;
-  width: 11.3rem;
-  height: 33px;
-  border-radius: 5px;
-  margin-right: 3rem;
-  background-color: #ffffff;
-  font-size: 18px;
-}
-
 #userMenu {
   height: 40px;
 }

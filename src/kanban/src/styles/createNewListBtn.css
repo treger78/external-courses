@@ -1,0 +1,18 @@
+#createNewList {
+  display: flex;
+  flex-direction: column;
+  background-color: #0067A3;
+  font-size: 16pt;
+  padding: 0.5rem;
+  margin-right: 5rem;
+}
+
+#createNewListItem>button {
+  justify-content: space-around;
+  width: 11.3rem;
+  height: 33px;
+  border-radius: 5px;
+  margin-right: 3rem;
+  background-color: #ffffff;
+  font-size: 18px;
+}
