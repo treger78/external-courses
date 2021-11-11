@@ -1,52 +1,6 @@
-let lists = [
-  {
-    title: 'Backlog', // заголовок блока
-    tasks: [ // массив задач
-      {
-        id: 'BacklogTask0',
-        name: 'Sprint bugfix',
-      },
-    ],
-  },
-
-  {
-    title: 'Ready',
-    tasks: [
-      {
-        id: 'ReadyTask0',
-        name: 'Shop bug1',
-      },
-      {
-        id: 'ReadyTask1',
-        name: 'Shop bug2',
-      },
-      {
-        id: 'ReadyTask2',
-        name: 'Shop bug3',
-      },
-    ],
-  },
-
-  {
-    title: 'In Progress',
-    tasks: [
-      {
-        id: 'ProgressTask0',
-        name: 'Auth bugfix',
-      },
-    ],
-  },
-
-  {
-    title: 'Finished',
-    tasks: [
-      {
-        id: 'FinishedTask0',
-        name: 'Main page bugfix',
-      },
-    ],
-  },
-];
+// eslint-disable-next-line import/extensions
+let lists = await import('./listsArray.js');
+lists = lists.listsArray;
 
 function fillLocalStorage(_lists) {
   return localStorage.setItem(_lists, JSON.stringify(_lists));
@@ -72,7 +26,7 @@ function insertListsFromLocalStorage(_lists) {
             </div>
             <ul class="listTasks"></ul>
             <div class="addCard">
-              <button class="addCardButton"><img src="public/assets/images/add-card.png" /> Add card</button>
+              <button class="addCardButton"><img src="src/assets/images/add-card.png" /> Add card</button>
             </div>
           <div>
         </div>
