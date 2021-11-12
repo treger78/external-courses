@@ -1,18 +1,17 @@
-// eslint-disable-next-line import/extensions
+/* eslint-disable import/extensions */
 let lists = await import('./listsArray.js');
+const fillLocalStorageObj = await import('./fillLocalStorage.js');
+
+const fillLocalStorage = fillLocalStorageObj.fillLocalStorage;
 
 lists = lists.listsArray;
 
-function fillLocalStorage(_lists) {
-  return localStorage.setItem(_lists, JSON.stringify(_lists));
-}
-
 if (localStorage.length === 0) {
-  fillLocalStorage(lists);
+  fillLocalStorage('lists', lists);
 }
 
-function insertListsFromLocalStorage(_lists) {
-  const refreshedLists = JSON.parse(localStorage.getItem(_lists));
+function insertListsFromLocalStorage(objName) {
+  const refreshedLists = JSON.parse(localStorage.getItem(objName));
   const main = document.getElementById('main');
 
   for (let i = 0; i < refreshedLists.length; i += 1) {
@@ -49,10 +48,10 @@ function insertListsFromLocalStorage(_lists) {
   return refreshedLists;
 }
 
-lists = insertListsFromLocalStorage(lists);
+lists = insertListsFromLocalStorage('lists');
 
-function changeAddCardBtnState(_lists) {
-  const refreshedLists = JSON.parse(localStorage.getItem(_lists));
+function changeAddCardBtnState(objName) {
+  const refreshedLists = JSON.parse(localStorage.getItem(objName));
 
   for (let i = 0; i < refreshedLists.length; i += 1) {
     const addCardButton = document.getElementsByClassName('addCardButton')[i + 1];
@@ -67,10 +66,10 @@ function changeAddCardBtnState(_lists) {
   return refreshedLists;
 }
 
-lists = changeAddCardBtnState(lists);
+lists = changeAddCardBtnState('lists');
 
-function findListIndex(_lists, _listName) {
-  const refreshedLists = JSON.parse(localStorage.getItem(_lists));
+function findListIndex(objName, _listName) {
+  const refreshedLists = JSON.parse(localStorage.getItem(objName));
 
   for (let i = 0; i < refreshedLists.length; i += 1) {
     if (refreshedLists[i].title === _listName) {
@@ -81,7 +80,7 @@ function findListIndex(_lists, _listName) {
   return null;
 }
 
-const backlogIndex = findListIndex(lists, 'Backlog');
+const backlogIndex = findListIndex('lists', 'Backlog');
 const backlogAddCardBtn = document.getElementsByClassName('addCard')[backlogIndex];
 
 backlogAddCardBtn.addEventListener('click', () => {
@@ -112,7 +111,7 @@ backlogAddCardBtn.addEventListener('click', () => {
 
     lists[backlogIndex].tasks.push({ id: newTaskID, name: inputTaskNameValue });
 
-    fillLocalStorage(lists);
+    fillLocalStorage('lists', lists);
 
     const newTask = document.createElement('li');
 
@@ -121,7 +120,7 @@ backlogAddCardBtn.addEventListener('click', () => {
 
     inputTaskName.replaceWith(newTask);
 
-    lists = changeAddCardBtnState(lists);
+    lists = changeAddCardBtnState('lists');
   });
 
   inputTaskName.addEventListener('keydown', (e) => {
@@ -186,16 +185,16 @@ function addTaskToListByNameAndRemoveFromPreviousList(_newTaskNameValue, _listNa
 
       _previousListTasks[i].remove();
 
-      fillLocalStorage(_lists);
+      fillLocalStorage('lists', _lists);
 
-      return changeAddCardBtnState(_lists);
+      return changeAddCardBtnState('lists');
     }
   }
 
   return _lists;
 }
 
-const readyIndex = findListIndex(lists, 'Ready');
+const readyIndex = findListIndex('lists', 'Ready');
 const readyAddCardBtn = document.getElementsByClassName('addCard')[readyIndex];
 
 readyAddCardBtn.addEventListener('click', () => {
@@ -208,7 +207,7 @@ readyAddCardBtn.addEventListener('click', () => {
   });
 });
 
-const progressIndex = findListIndex(lists, 'In Progress');
+const progressIndex = findListIndex('lists', 'In Progress');
 const progressAddCardBtn = document.getElementsByClassName('addCard')[progressIndex];
 
 progressAddCardBtn.addEventListener('click', () => {
@@ -222,7 +221,7 @@ progressAddCardBtn.addEventListener('click', () => {
   });
 });
 
-const finishedIndex = findListIndex(lists, 'Finished');
+const finishedIndex = findListIndex('lists', 'Finished');
 const finishedAddCardBtn = document.getElementsByClassName('addCard')[finishedIndex];
 
 finishedAddCardBtn.addEventListener('click', () => {

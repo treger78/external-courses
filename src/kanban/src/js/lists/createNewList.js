@@ -1,7 +1,10 @@
 /* eslint-disable import/extensions */
-// const fillLocalStorage = await import('./fillLocalStorage.js');
-// const importedLists = await import('./listsArray.js');
-// let lists = JSON.parse(localStorage.getItem(importedLists.listsArray));
+let lists = await import('./listsArray.js');
+const fillLocalStorageObj = await import('./fillLocalStorage.js');
+
+const fillLocalStorage = fillLocalStorageObj.fillLocalStorage;
+
+lists = lists.listsArray;
 
 const createNewListButton = document.getElementById('createNewListButton');
 
@@ -59,14 +62,12 @@ createNewListButton.addEventListener('click', () => {
       `,
     );
 
-    /*
     lists.unshift({
       title: newListNameValue,
       tasks: [],
     });
-    */
 
-  //  fillLocalStorage(lists);
+    fillLocalStorage('lists', lists);
   });
 
   inputNewListName.addEventListener('keydown', (e) => {
