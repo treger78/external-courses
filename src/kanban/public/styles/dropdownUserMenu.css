@@ -1,0 +1,29 @@
+#dropdowUserMenu {
+  display: flex;
+  flex-direction: column;
+  background-color: #0067A3;
+  font-size: 16pt;
+  position: absolute;
+  top: 3.5rem;
+  right: 0.1rem;
+  padding: 0.5rem;
+}
+
+#dropdowUserMenu li {
+  list-style: none;
+}
+
+#dropdowUserMenu a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+#dropdowUserMenu a:hover {
+  opacity: 80%;
+}
+
+@media screen and (max-width: 710px) {
+  #dropdowUserMenu {
+    top: 5.5rem;
+  }
+}
