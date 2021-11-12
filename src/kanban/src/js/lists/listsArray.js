@@ -3,7 +3,7 @@ const listsArray = [
     title: 'Backlog', // заголовок блока
     tasks: [ // массив задач
       {
-        id: 'BacklogTask0',
+        id: '0',
         name: 'Sprint bugfix',
       },
     ],
@@ -13,15 +13,15 @@ const listsArray = [
     title: 'Ready',
     tasks: [
       {
-        id: 'ReadyTask0',
+        id: '0',
         name: 'Shop bug1',
       },
       {
-        id: 'ReadyTask1',
+        id: '1',
         name: 'Shop bug2',
       },
       {
-        id: 'ReadyTask2',
+        id: '2',
         name: 'Shop bug3',
       },
     ],
@@ -31,7 +31,7 @@ const listsArray = [
     title: 'In Progress',
     tasks: [
       {
-        id: 'ProgressTask0',
+        id: '0',
         name: 'Auth bugfix',
       },
     ],
@@ -41,7 +41,7 @@ const listsArray = [
     title: 'Finished',
     tasks: [
       {
-        id: 'FinishedTask0',
+        id: '0',
         name: 'Main page bugfix',
       },
     ],

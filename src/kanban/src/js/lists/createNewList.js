@@ -1,8 +1,10 @@
 /* eslint-disable import/extensions */
 let lists = await import('./listsArray.js');
-const fillLocalStorageObj = await import('./fillLocalStorage.js');
+const fillLocalStorageObj = await import('../utils/lists/fillLocalStorage.js');
+const changeAddCardBtnStateObj = await import('../utils/lists/changeAddCardBtnState.js');
 
 const fillLocalStorage = fillLocalStorageObj.fillLocalStorage;
+const changeAddCardBtnState = changeAddCardBtnStateObj.changeAddCardBtnState;
 
 lists = lists.listsArray;
 
@@ -68,6 +70,8 @@ createNewListButton.addEventListener('click', () => {
     });
 
     fillLocalStorage('lists', lists);
+
+    lists = changeAddCardBtnState('lists');
   });
 
   inputNewListName.addEventListener('keydown', (e) => {

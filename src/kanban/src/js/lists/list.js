@@ -1,8 +1,10 @@
 /* eslint-disable import/extensions */
 let lists = await import('./listsArray.js');
-const fillLocalStorageObj = await import('./fillLocalStorage.js');
+const fillLocalStorageObj = await import('../utils/lists/fillLocalStorage.js');
+const changeAddCardBtnStateObj = await import('../utils/lists/changeAddCardBtnState.js');
 
 const fillLocalStorage = fillLocalStorageObj.fillLocalStorage;
+const changeAddCardBtnState = changeAddCardBtnStateObj.changeAddCardBtnState;
 
 lists = lists.listsArray;
 
@@ -49,86 +51,7 @@ function insertListsFromLocalStorage(objName) {
 }
 
 lists = insertListsFromLocalStorage('lists');
-
-function changeAddCardBtnState(objName) {
-  const refreshedLists = JSON.parse(localStorage.getItem(objName));
-
-  for (let i = 0; i < refreshedLists.length; i += 1) {
-    const addCardButton = document.getElementsByClassName('addCardButton')[i + 1];
-
-    if (refreshedLists[i].tasks.length < 1) {
-      addCardButton.setAttribute('disabled', 'disabled');
-    } else if (addCardButton !== undefined) {
-      addCardButton.removeAttribute('disabled');
-    }
-  }
-
-  return refreshedLists;
-}
-
 lists = changeAddCardBtnState('lists');
-
-function findListIndex(objName, _listName) {
-  const refreshedLists = JSON.parse(localStorage.getItem(objName));
-
-  for (let i = 0; i < refreshedLists.length; i += 1) {
-    if (refreshedLists[i].title === _listName) {
-      return i;
-    }
-  }
-
-  return null;
-}
-
-const backlogIndex = findListIndex('lists', 'Backlog');
-const backlogAddCardBtn = document.getElementsByClassName('addCard')[backlogIndex];
-
-backlogAddCardBtn.addEventListener('click', () => {
-  const listTasks = document.getElementsByClassName('listTasks')[backlogIndex];
-  const inputTaskName = document.createElement('input');
-
-  inputTaskName.className = 'task';
-  inputTaskName.style.border = 'none';
-
-  listTasks.append(inputTaskName);
-
-  inputTaskName.focus();
-
-  // eslint-disable-next-line consistent-return
-  inputTaskName.addEventListener('blur', () => {
-    const inputTaskNameValue = inputTaskName.value.trim();
-
-    if (inputTaskNameValue.replace(/\s+/g, '') === '' || inputTaskNameValue === undefined) {
-      // eslint-disable-next-line no-alert
-      alert('Enter task name!');
-
-      inputTaskName.remove();
-
-      return null;
-    }
-
-    const newTaskID = `BacklogTask${lists[backlogIndex].tasks.length}`;
-
-    lists[backlogIndex].tasks.push({ id: newTaskID, name: inputTaskNameValue });
-
-    fillLocalStorage('lists', lists);
-
-    const newTask = document.createElement('li');
-
-    newTask.className = 'task';
-    newTask.innerText = inputTaskNameValue;
-
-    inputTaskName.replaceWith(newTask);
-
-    lists = changeAddCardBtnState('lists');
-  });
-
-  inputTaskName.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      inputTaskName.blur();
-    }
-  });
-});
 
 function createAndAppendDropdownTasks(targetListIndexParam, previousListIndexParam) {
   const listTasks = document.getElementsByClassName('listTasks')[targetListIndexParam];
@@ -164,11 +87,10 @@ function createAndAppendDropdownTasks(targetListIndexParam, previousListIndexPar
   return { dropdownTasks, previousListTasks };
 }
 
-function addTaskToListByNameAndRemoveFromPreviousList(_newTaskNameValue, _listName, listIndexParam,
-  _lists, _previousListTasks, previousListIndexParam) {
+function addTaskToListByNameAndRemoveFromPreviousList(_newTaskNameValue, listIndexParam, _lists,
+  _previousListTasks, previousListIndexParam) {
   const newTaskName = _newTaskNameValue.value;
-  const listName = _listName;
-  const newTaskID = `${listName}${_lists[listIndexParam].tasks.length}`;
+  const newTaskID = `${_lists[listIndexParam].tasks.length}`;
 
   _lists[listIndexParam].tasks.push({ id: newTaskID, name: newTaskName });
 
@@ -194,43 +116,68 @@ function addTaskToListByNameAndRemoveFromPreviousList(_newTaskNameValue, _listNa
   return _lists;
 }
 
-const readyIndex = findListIndex('lists', 'Ready');
-const readyAddCardBtn = document.getElementsByClassName('addCard')[readyIndex];
+function addListenersToLists(_lists) {
+  const listsBlocks = document.getElementById('main').children;
 
-readyAddCardBtn.addEventListener('click', () => {
-  const obj = createAndAppendDropdownTasks(readyIndex, backlogIndex);
-  const dropdownTasks = obj.dropdownTasks;
-  const previousListTasks = obj.previousListTasks;
+  listsBlocks[0].getElementsByClassName('addCardButton')[0].addEventListener('click', () => {
+    const listTasks = document.getElementsByClassName('listTasks')[0];
+    const inputTaskName = document.createElement('input');
 
-  dropdownTasks.addEventListener('change', () => {
-    lists = addTaskToListByNameAndRemoveFromPreviousList(dropdownTasks, 'ReadyTask', readyIndex, lists, previousListTasks, backlogIndex);
+    inputTaskName.className = 'task';
+    inputTaskName.style.border = 'none';
+
+    listTasks.append(inputTaskName);
+
+    inputTaskName.focus();
+
+    // eslint-disable-next-line consistent-return
+    inputTaskName.addEventListener('blur', () => {
+      const inputTaskNameValue = inputTaskName.value.trim();
+
+      if (inputTaskNameValue.replace(/\s+/g, '') === '' || inputTaskNameValue === undefined) {
+        // eslint-disable-next-line no-alert
+        alert('Enter task name!');
+
+        inputTaskName.remove();
+
+        return null;
+      }
+
+      const newTaskID = `${lists[0].tasks.length}`;
+
+      lists[0].tasks.push({ id: newTaskID, name: inputTaskNameValue });
+
+      fillLocalStorage('lists', lists);
+
+      const newTask = document.createElement('li');
+
+      newTask.className = 'task';
+      newTask.innerText = inputTaskNameValue;
+
+      inputTaskName.replaceWith(newTask);
+
+      lists = changeAddCardBtnState('lists');
+    });
+
+    inputTaskName.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        inputTaskName.blur();
+      }
+    });
   });
-});
 
-const progressIndex = findListIndex('lists', 'In Progress');
-const progressAddCardBtn = document.getElementsByClassName('addCard')[progressIndex];
+  for (let i = 1; i < listsBlocks.length; i += 1) {
+    listsBlocks[i].getElementsByClassName('addCardButton')[0].addEventListener('click', () => {
+      const obj = createAndAppendDropdownTasks(i, i - 1);
+      const dropdownTasks = obj.dropdownTasks;
+      const previousListTasks = obj.previousListTasks;
 
-progressAddCardBtn.addEventListener('click', () => {
-  const obj = createAndAppendDropdownTasks(progressIndex, readyIndex);
-  const dropdownTasks = obj.dropdownTasks;
-  const previousListTasks = obj.previousListTasks;
+      dropdownTasks.addEventListener('change', () => {
+        addTaskToListByNameAndRemoveFromPreviousList(dropdownTasks, i, _lists,
+          previousListTasks, i - 1);
+      });
+    });
+  }
+}
 
-  dropdownTasks.addEventListener('change', () => {
-    lists = addTaskToListByNameAndRemoveFromPreviousList(dropdownTasks, 'ProgressTask',
-      progressIndex, lists, previousListTasks, readyIndex);
-  });
-});
-
-const finishedIndex = findListIndex('lists', 'Finished');
-const finishedAddCardBtn = document.getElementsByClassName('addCard')[finishedIndex];
-
-finishedAddCardBtn.addEventListener('click', () => {
-  const obj = createAndAppendDropdownTasks(finishedIndex, progressIndex);
-  const dropdownTasks = obj.dropdownTasks;
-  const previousListTasks = obj.previousListTasks;
-
-  dropdownTasks.addEventListener('change', () => {
-    lists = addTaskToListByNameAndRemoveFromPreviousList(dropdownTasks, 'FinishedTask',
-      finishedIndex, lists, previousListTasks, progressIndex);
-  });
-});
+addListenersToLists(lists);
