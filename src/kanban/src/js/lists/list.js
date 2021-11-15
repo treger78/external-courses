@@ -32,7 +32,7 @@ function insertListsFromLocalStorage(objName) {
             <div class="addCard">
               <button class="addCardButton"><img src="src/assets/images/add-card.png" /> Add card</button>
             </div>
-          <div>
+          </div>
         </div>
       `,
     );

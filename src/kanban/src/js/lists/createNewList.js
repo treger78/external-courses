@@ -24,7 +24,7 @@ createNewListButton.addEventListener('click', () => {
           <input type="text" class="listName"></input>
           <div class="listMenu">•••</div>
         </div>
-      <div>
+      </div>
     </div>
     `,
   );
@@ -76,6 +76,8 @@ createNewListButton.addEventListener('click', () => {
     lists = changeAddCardBtnState('lists');
 
     addListenersToLists(lists);
+
+    // location.reload();
   });
 
   inputNewListName.addEventListener('keydown', (e) => {
