@@ -167,19 +167,7 @@ function addTaskToListByNameAndRemoveFromPreviousList(_newTaskNameValue, listInd
   const newTaskName = _newTaskNameValue.value;
   const newTaskID = `${_lists[listIndexParam].tasks.length}`;
 
-  /*
-  console.log('_lists');
-  console.log(_lists);
-  */
   _lists[listIndexParam].tasks.push({ id: newTaskID, name: newTaskName });
-
-  /*
-  console.log('_lists[listIndexParam].tasks');
-  console.log(_lists[listIndexParam].tasks);
-
-  console.log('_lists');
-  console.log(_lists);
-  */
 
   const newTask = document.createElement('li');
 
@@ -188,11 +176,7 @@ function addTaskToListByNameAndRemoveFromPreviousList(_newTaskNameValue, listInd
 
   _newTaskNameValue.replaceWith(newTask);
 
-  console.log('_previousListTasks.length');
-  console.log(_previousListTasks.length);
   for (let i = 0; i < _previousListTasks.length; i += 1) {
-    console.log('_lists[previousListIndexParam].tasks');
-    console.log(_lists[previousListIndexParam].tasks);
     if (_lists[previousListIndexParam].tasks[i].name === newTaskName) {
       _lists[previousListIndexParam].tasks.splice(i, 1);
 
@@ -203,10 +187,6 @@ function addTaskToListByNameAndRemoveFromPreviousList(_newTaskNameValue, listInd
       return changeAddCardBtnState('lists');
     }
   }
-  console.log('_previousListTasks.length');
-  console.log(_previousListTasks.length);
-  console.log('_lists[previousListIndexParam].tasks');
-  console.log(_lists[previousListIndexParam].tasks);
 
   return _lists;
 }
@@ -240,14 +220,7 @@ function addListenersToLists(_lists) {
 
       const newTaskID = `${_lists[0].tasks.length}`;
 
-      console.log('_lists');
-      console.log(_lists);
       _lists[0].tasks.push({ id: newTaskID, name: inputTaskNameValue });
-      console.log('lists[0].tasks');
-      console.log(_lists[0].tasks);
-
-      console.log('_lists');
-      console.log(_lists);
 
       fillLocalStorage('lists', _lists);
 
@@ -347,11 +320,13 @@ createNewListButton.addEventListener('click', () => {
 
     fillLocalStorage('lists', lists);
 
+    main.textContent = '';
+
+    insertListsFromLocalStorage('lists');
+
     lists = changeAddCardBtnState('lists');
 
     addListenersToLists(lists);
-
-    // location.reload();
   });
 
   inputNewListName.addEventListener('keydown', (e) => {
