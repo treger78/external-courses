@@ -1,70 +1,16 @@
 /* eslint-disable import/extensions */
-// let lists = await import('./listsArray.js');
-// const fillLocalStorageObj = await import('../utils/lists/fillLocalStorage.js');
-// const changeAddCardBtnStateObj = await import('../utils/lists/changeAddCardBtnState.js');
+let lists = await import('./listsArray.js');
+const fillLocalStorageObj = await import('../utils/lists/fillLocalStorage.js');
+const changeAddCardBtnStateObj = await import('../utils/lists/changeAddCardBtnState.js');
 // eslint-disable-next-line max-len
-// const createAndAppendDropdownTasksObj = await import('../utils/lists/createAndAppendDropdownTasks.js');
+const createAndAppendDropdownTasksObj = await import('../utils/lists/createAndAppendDropdownTasks.js');
 
-// const fillLocalStorage = fillLocalStorageObj.fillLocalStorage;
-// const changeAddCardBtnState = changeAddCardBtnStateObj.changeAddCardBtnState;
+const fillLocalStorage = fillLocalStorageObj.fillLocalStorage;
+const changeAddCardBtnState = changeAddCardBtnStateObj.changeAddCardBtnState;
 // eslint-disable-next-line max-len
-// const createAndAppendDropdownTasks = createAndAppendDropdownTasksObj.createAndAppendDropdownTasks;
+const createAndAppendDropdownTasks = createAndAppendDropdownTasksObj.createAndAppendDropdownTasks;
 
-// lists = lists.listsArray;
-
-let lists = [
-  {
-    title: 'Backlog', // заголовок блока
-    tasks: [ // массив задач
-      {
-        id: '0',
-        name: 'Sprint bugfix',
-      },
-    ],
-  },
-
-  {
-    title: 'Ready',
-    tasks: [
-      {
-        id: '0',
-        name: 'Shop bug1',
-      },
-      {
-        id: '1',
-        name: 'Shop bug2',
-      },
-      {
-        id: '2',
-        name: 'Shop bug3',
-      },
-    ],
-  },
-
-  {
-    title: 'In Progress',
-    tasks: [
-      {
-        id: '0',
-        name: 'Auth bugfix',
-      },
-    ],
-  },
-
-  {
-    title: 'Finished',
-    tasks: [
-      {
-        id: '0',
-        name: 'Main page bugfix',
-      },
-    ],
-  },
-];
-
-function fillLocalStorage(objName, _lists) {
-  return localStorage.setItem(objName, JSON.stringify(_lists));
-}
+lists = lists.listsArray;
 
 if (localStorage.length === 0) {
   fillLocalStorage('lists', lists);
@@ -110,57 +56,7 @@ function insertListsFromLocalStorage(objName) {
 
 lists = insertListsFromLocalStorage('lists');
 
-function changeAddCardBtnState(objName) {
-  const refreshedLists = JSON.parse(localStorage.getItem(objName));
-
-  for (let i = 0; i < refreshedLists.length; i += 1) {
-    const addCardButton = document.getElementsByClassName('addCardButton')[i + 1];
-
-    if (refreshedLists[i].tasks.length < 1) {
-      addCardButton.setAttribute('disabled', 'disabled');
-    } else if (addCardButton !== undefined) {
-      addCardButton.removeAttribute('disabled');
-    }
-  }
-
-  return refreshedLists;
-}
-
 lists = changeAddCardBtnState('lists');
-
-function createAndAppendDropdownTasks(targetListIndexParam, previousListIndexParam) {
-  const listTasks = document.getElementsByClassName('listTasks')[targetListIndexParam];
-  const dropdownTasks = document.createElement('select');
-
-  dropdownTasks.className = 'task';
-  dropdownTasks.style.border = 'none';
-  dropdownTasks.style.width = '16rem';
-  dropdownTasks.style.fontSize = '18px';
-  dropdownTasks.style.padding = '0.5rem';
-
-  dropdownTasks.insertAdjacentHTML(
-    'beforeend',
-    `
-      <option disabled selected>Select task</option>
-    `,
-  );
-
-  const previousList = document.getElementsByClassName('listTasks')[previousListIndexParam];
-  const previousListTasks = previousList.children;
-
-  for (let i = 0; i < previousListTasks.length; i += 1) {
-    dropdownTasks.insertAdjacentHTML(
-      'beforeend',
-      `
-        <option>${previousListTasks[i].textContent}</option>
-      `,
-    );
-  }
-
-  listTasks.append(dropdownTasks);
-
-  return { dropdownTasks, previousListTasks };
-}
 
 function addTaskToListByNameAndRemoveFromPreviousList(_newTaskNameValue, listIndexParam, _lists,
   _previousListTasks, previousListIndexParam) {
