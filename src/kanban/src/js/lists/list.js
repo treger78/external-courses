@@ -4,6 +4,7 @@ const fillLocalStorageObj = await import('../utils/lists/fillLocalStorage.js');
 const changeAddCardBtnStateObj = await import('../utils/lists/changeAddCardBtnState.js');
 // eslint-disable-next-line max-len
 const createAndAppendDropdownTasksObj = await import('../utils/lists/createAndAppendDropdownTasks.js');
+const listMenuObj = await import('../utils/lists/listMenu.js');
 
 const fillLocalStorage = fillLocalStorageObj.fillLocalStorage;
 const changeAddCardBtnState = changeAddCardBtnStateObj.changeAddCardBtnState;
@@ -28,7 +29,9 @@ function insertListsFromLocalStorage(objName) {
           <div class="list">
             <div class="listHeader">
               <div class="listName">${refreshedLists[i].title}</div>
-              <div class="listMenu">•••</div>
+              <div class="listMenu">
+                <div>•••</div>
+              </div>
             </div>
             <ul class="listTasks"></ul>
             <div class="addCard">
@@ -149,6 +152,18 @@ function addListenersToLists(_lists) {
       });
     });
   }
+
+  for (let i = 0; i < listsBlocks.length; i += 1) {
+    const listMenu = new listMenuObj.ListMenu(listsBlocks[i].getElementsByClassName('listMenu')[0]);
+
+    listsBlocks[i].getElementsByClassName('listMenu')[0].addEventListener('click', () => {
+      if (!listMenu.isActiveListMenu) {
+        listMenu.generateListMenu();
+      } else {
+        listMenu.removeListMenu();
+      }
+    });
+  }
 }
 
 addListenersToLists(lists);
@@ -165,7 +180,9 @@ createNewListButton.addEventListener('click', () => {
       <div class="list">
         <div class="listHeader">
           <input type="text" class="listName"></input>
-          <div class="listMenu">•••</div>
+          <div class="listMenu">
+            <div>•••</div>
+          </div>
         </div>
       </div>
     </div>

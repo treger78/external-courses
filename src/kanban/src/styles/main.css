@@ -2,6 +2,7 @@
 @import "dropdownUserMenu.css";
 @import "createNewListBtn.css";
 @import "list.css";
+@import "listMenu.css";
 @import "footer.css";
 * {
   margin: 0;

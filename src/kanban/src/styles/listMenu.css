@@ -1,0 +1,31 @@
+.listMenu {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  cursor: pointer;
+}
+
+.dropdowListMenu {
+  display: flex;
+  flex-direction: column;
+  background-color: #dbdbdb;
+  font-size: 16pt;
+  top: 8rem;
+  left: 15rem;
+  padding: 0.5rem;
+}
+
+.dropdowListMenu li {
+  list-style: none;
+}
+
+.dropdowListMenu li:hover {
+  opacity: 80%;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 710px) {
+  .dropdowListMenu {
+    top: 11rem;
+  }
+}
