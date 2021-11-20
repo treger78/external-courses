@@ -5,16 +5,19 @@ const changeAddCardBtnStateObj = await import('../utils/lists/changeAddCardBtnSt
 // eslint-disable-next-line max-len
 const createAndAppendDropdownTasksObj = await import('../utils/lists/createAndAppendDropdownTasks.js');
 const listMenuObj = await import('../utils/lists/listMenu.js');
+const tasksCounterObj = await import('../utils/footer/tasksCounter.js');
 
 const fillLocalStorage = fillLocalStorageObj.fillLocalStorage;
 const changeAddCardBtnState = changeAddCardBtnStateObj.changeAddCardBtnState;
 // eslint-disable-next-line max-len
 const createAndAppendDropdownTasks = createAndAppendDropdownTasksObj.createAndAppendDropdownTasks;
+const tasksCounter = tasksCounterObj.tasksCounter;
 
 lists = lists.listsArray;
 
 if (localStorage.length === 0) {
   fillLocalStorage('lists', lists);
+  tasksCounter();
 }
 
 function insertListsFromLocalStorage(objName) {
@@ -54,6 +57,8 @@ function insertListsFromLocalStorage(objName) {
     }
   }
 
+  tasksCounter();
+
   return refreshedLists;
 }
 
@@ -79,6 +84,8 @@ function addTaskToListByNameAndRemoveFromPreviousList(_newTaskNameValue, listInd
 
       fillLocalStorage('lists', _lists);
 
+      tasksCounter();
+
       return changeAddCardBtnState('lists');
     }
   }
@@ -99,6 +106,8 @@ function removeList(_lists, listIndex) {
   } else {
     document.getElementById('main').innerHTML = '<div id="mainIsEmpty">You do not have active task lists, add new ones using the button "Create new list"!</div>';
   }
+
+  tasksCounter();
 
   return _lists.length;
 }
@@ -143,6 +152,7 @@ function addListenersToLists(_lists) {
 
       inputTaskName.replaceWith(newTask);
 
+      tasksCounter();
       changeAddCardBtnState('lists');
     });
 

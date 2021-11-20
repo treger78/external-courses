@@ -1,3 +1,6 @@
+// eslint-disable-next-line import/extensions
+const tasksCounterObj = await import('../utils/footer/tasksCounter.js');
+const tasksCounter = tasksCounterObj.tasksCounter;
 const footer = document.getElementById('footer');
 
 footer.innerHTML = `
@@ -7,3 +10,5 @@ footer.innerHTML = `
   </div>
   <div>Kanban board by Ilia Pustograev, 2021</div>
 `;
+
+tasksCounter();
