@@ -9,7 +9,7 @@ function ListMenu(listMenu) {
       'beforeend',
       `
         <ul class="dropdowListMenu">
-          <li>Delete list</li>
+          <li class="deleteList">Delete list</li>
         </ul>
       `,
     );

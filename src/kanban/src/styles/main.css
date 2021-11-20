@@ -26,6 +26,11 @@ main {
   background-color: #007ac0;
 }
 
+#mainIsEmpty {
+  color: #ffffff;
+  font-size: 14pt;
+}
+
 ::-webkit-scrollbar {
   width: 12px;
   height: 12px;

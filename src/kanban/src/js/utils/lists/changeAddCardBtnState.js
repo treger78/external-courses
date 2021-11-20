@@ -1,6 +1,10 @@
 function changeAddCardBtnState(objName) {
   const refreshedLists = JSON.parse(localStorage.getItem(objName));
 
+  if (document.getElementsByClassName('addCardButton').length <= 1) {
+    return refreshedLists;
+  }
+
   for (let i = 0; i < refreshedLists.length; i += 1) {
     const addCardButton = document.getElementsByClassName('addCardButton')[i + 1];
 
