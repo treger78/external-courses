@@ -5,7 +5,7 @@ function changeAddCardBtnState(objName) {
     return refreshedLists;
   }
 
-  for (let i = 0; i < refreshedLists.length; i += 1) {
+  for (let i = 0; i < refreshedLists.length - 1; i += 1) {
     const addCardButton = document.getElementsByClassName('addCardButton')[i + 1];
 
     if (refreshedLists[i].tasks.length < 1) {
