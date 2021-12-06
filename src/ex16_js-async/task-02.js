@@ -1,39 +1,27 @@
-function debounce(debouncedInputElem, debouncedElem, debounceInterval) {
-  const refreshDebounce = setInterval(() => {
+function debounce(target, debouncedElem, debounceInterval) {
+  setTimeout(() => {
     // eslint-disable-next-line no-param-reassign
-    debouncedElem.textContent = debouncedInputElem.value;
+    debouncedElem.textContent = target;
   }, debounceInterval);
-
-  if (debounceInterval === -1) clearInterval(refreshDebounce);
 }
 
 const debouncedInputElem = document.getElementById('debouncedContent');
 const debouncedElem = document.getElementById('debounced');
 
-debouncedInputElem.addEventListener('focus', () => {
-  debounce(debouncedInputElem, debouncedElem, 1500);
+debouncedInputElem.addEventListener('input', (event) => {
+  debounce(event.target.value, debouncedElem, 1500);
 });
 
-debouncedInputElem.addEventListener('blur', () => {
-  debounce(debouncedInputElem, debouncedElem, -1);
-});
-
-function regular(regularInputElem, regularElem, regularInterval) {
-  const refreshRegular = setInterval(() => {
+function regular(target, regularElem, regularInterval) {
+  return setTimeout(() => {
     // eslint-disable-next-line no-param-reassign
-    regularElem.textContent = regularInputElem.value;
+    regularElem.textContent = target;
   }, regularInterval);
-
-  if (regularElem === -1) clearInterval(refreshRegular);
 }
 
 const regularInputElem = document.getElementById('regularContent');
 const regularElem = document.getElementById('regular');
 
-regularInputElem.addEventListener('focus', () => {
-  regular(regularInputElem, regularElem, 1);
-});
-
-regularInputElem.addEventListener('blur', () => {
-  regular(regularInputElem, regularElem, -1);
+regularInputElem.addEventListener('input', (event) => {
+  regular(event.target.value, regularElem, 1);
 });
