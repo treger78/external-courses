@@ -1,4 +1,4 @@
-export function ListMenu(listMenu) {
+export default function ListMenu(listMenu) {
   this.listMenu = listMenu;
   this.isActiveListMenu = false;
 

@@ -1,19 +1,10 @@
 /* eslint-disable import/extensions */
-let lists = await import('./listsArray.js');
-const fillLocalStorageObj = await import('./fillLocalStorage.js');
-const changeAddCardBtnStateObj = await import('./changeAddCardBtnState.js');
-// eslint-disable-next-line max-len
-const createAndAppendDropdownTasksObj = await import('./createAndAppendDropdownTasks.js');
-const listMenuObj = await import('./listMenu/listMenu.js');
-const tasksCounterObj = await import('../footer/tasksCounter.js');
-
-const fillLocalStorage = fillLocalStorageObj.fillLocalStorage;
-const changeAddCardBtnState = changeAddCardBtnStateObj.changeAddCardBtnState;
-// eslint-disable-next-line max-len
-const createAndAppendDropdownTasks = createAndAppendDropdownTasksObj.createAndAppendDropdownTasks;
-const tasksCounter = tasksCounterObj.tasksCounter;
-
-lists = lists.listsArray;
+import tasksCounter from '../footer/tasksCounter.js';
+import { listsArray as lists } from './listsArray.js';
+import fillLocalStorage from './fillLocalStorage.js';
+import changeAddCardBtnState from './changeAddCardBtnState.js';
+import createAndAppendDropdownTasks from './createAndAppendDropdownTasks.js';
+import ListMenu from './listMenu/listMenu.js';
 
 if (localStorage.length === 0) {
   fillLocalStorage('lists', lists);
@@ -178,7 +169,7 @@ function addListenersToLists(_lists) {
 
   for (let i = 0; i < listsBlocks.length; i += 1) {
     const listMenuBlock = listsBlocks[i].getElementsByClassName('listMenu')[0];
-    const listMenu = new listMenuObj.ListMenu(listMenuBlock);
+    const listMenu = new ListMenu(listMenuBlock);
 
     listMenuBlock.addEventListener('click', () => {
       if (!listMenu.isActiveListMenu) {
@@ -196,12 +187,15 @@ function addListenersToLists(_lists) {
 }
 
 if (JSON.parse(localStorage.getItem('lists')).length) {
-  lists = insertListsFromLocalStorage('lists');
-  lists = changeAddCardBtnState('lists');
+  // lists = insertListsFromLocalStorage('lists');
+  // lists = changeAddCardBtnState('lists');
+  insertListsFromLocalStorage('lists');
+  changeAddCardBtnState('lists');
   addListenersToLists(lists);
 } else {
   document.getElementById('main').innerHTML = '<div id="mainIsEmpty">You do not have active task lists, add new ones using the button "Create new list"!</div>';
-  lists = [];
+  // lists = [];
+  lists.length = 0;
 }
 
 const createNewListButton = document.getElementById('createNewListButton');
@@ -273,7 +267,8 @@ createNewListButton.addEventListener('click', () => {
 
     insertListsFromLocalStorage('lists');
 
-    lists = changeAddCardBtnState('lists');
+    // lists = changeAddCardBtnState('lists');
+    changeAddCardBtnState('lists');
 
     addListenersToLists(lists);
   });

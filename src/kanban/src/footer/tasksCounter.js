@@ -1,4 +1,4 @@
-export function tasksCounter() {
+export default function tasksCounter() {
   const lists = JSON.parse(localStorage.getItem('lists'));
   if (lists !== null && lists.length) {
     document.getElementById('activeTasks').innerText = `${lists[0].tasks.length}`;
