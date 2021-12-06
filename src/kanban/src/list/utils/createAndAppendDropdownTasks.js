@@ -1,4 +1,10 @@
 export default function createAndAppendDropdownTasks(targetListIndexParam, previousListIndexParam) {
+  const hasSelect = document.getElementsByTagName('select')[0];
+
+  if (hasSelect) {
+    hasSelect.remove();
+  }
+
   const listTasks = document.getElementsByClassName('listTasks')[targetListIndexParam];
   const dropdownTasks = document.createElement('select');
 
