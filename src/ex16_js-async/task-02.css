@@ -1,0 +1,37 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form label {
+  margin: 1rem;
+  font-weight: bold;
+  font-size: 14pt;
+  display: flex;
+}
+
+label div {
+  display: flex;
+  flex-direction: column;
+}
+
+span {
+  height: 1rem;
+}
+
+input {
+  font-size: 14pt;
+  margin-left: 0.5rem;
+}
