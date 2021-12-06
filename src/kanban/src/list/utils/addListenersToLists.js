@@ -61,12 +61,10 @@ export default function addListenersToLists(_lists) {
   for (let i = 1; i < listsBlocks.length; i += 1) {
     listsBlocks[i].getElementsByClassName('addCardButton')[0].addEventListener('click', () => {
       const obj = createAndAppendDropdownTasks(i, i - 1);
-      const dropdownTasks = obj.dropdownTasks;
-      const previousListTasks = obj.previousListTasks;
 
-      dropdownTasks.addEventListener('change', () => {
-        addTaskToListByNameAndRemoveFromPreviousList(dropdownTasks, i, _lists,
-          previousListTasks, i - 1);
+      obj.dropdownTasks.addEventListener('change', () => {
+        addTaskToListByNameAndRemoveFromPreviousList(obj.dropdownTasks, i, _lists,
+          obj.previousListTasks, i - 1);
       });
     });
   }
@@ -80,7 +78,7 @@ export default function addListenersToLists(_lists) {
         listMenu.generateListMenu();
 
         listMenuBlock.getElementsByClassName('deleteList')[0].addEventListener('click', () => {
-          const listLength = removeList(_lists);
+          const listLength = removeList(_lists, i);
           if (listLength) addListenersToLists(_lists);
         });
       } else {
