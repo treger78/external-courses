@@ -1,4 +1,4 @@
-const listsArray = [
+export const listsArray = [
   {
     title: 'Backlog', // заголовок блока
     tasks: [ // массив задач
@@ -47,5 +47,3 @@ const listsArray = [
     ],
   },
 ];
-
-export { listsArray };

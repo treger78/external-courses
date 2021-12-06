@@ -1,9 +1,10 @@
-@import "header.css";
-@import "dropdownUserMenu.css";
-@import "createNewListBtn.css";
-@import "list.css";
-@import "listMenu.css";
-@import "footer.css";
+@import "./header/header.css";
+@import "./header/createNewListButton/createNewListButton.css";
+@import "./header/dropdownUserMenu/dropdownUserMenu.css";
+@import "./list/list.css";
+@import "./list/listMenu/listMenu.css";
+@import "./footer/footer.css";
+
 * {
   margin: 0;
   padding: 0;

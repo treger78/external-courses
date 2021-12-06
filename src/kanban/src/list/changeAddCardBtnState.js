@@ -1,4 +1,4 @@
-function changeAddCardBtnState(objName) {
+export function changeAddCardBtnState(objName) {
   const refreshedLists = JSON.parse(localStorage.getItem(objName));
 
   if (document.getElementsByClassName('addCardButton').length <= 1) {
@@ -17,5 +17,3 @@ function changeAddCardBtnState(objName) {
 
   return refreshedLists;
 }
-
-export { changeAddCardBtnState };

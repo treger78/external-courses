@@ -1,11 +1,11 @@
 /* eslint-disable import/extensions */
 let lists = await import('./listsArray.js');
-const fillLocalStorageObj = await import('../utils/lists/fillLocalStorage.js');
-const changeAddCardBtnStateObj = await import('../utils/lists/changeAddCardBtnState.js');
+const fillLocalStorageObj = await import('./fillLocalStorage.js');
+const changeAddCardBtnStateObj = await import('./changeAddCardBtnState.js');
 // eslint-disable-next-line max-len
-const createAndAppendDropdownTasksObj = await import('../utils/lists/createAndAppendDropdownTasks.js');
-const listMenuObj = await import('../utils/lists/listMenu.js');
-const tasksCounterObj = await import('../utils/footer/tasksCounter.js');
+const createAndAppendDropdownTasksObj = await import('./createAndAppendDropdownTasks.js');
+const listMenuObj = await import('./listMenu/listMenu.js');
+const tasksCounterObj = await import('../footer/tasksCounter.js');
 
 const fillLocalStorage = fillLocalStorageObj.fillLocalStorage;
 const changeAddCardBtnState = changeAddCardBtnStateObj.changeAddCardBtnState;

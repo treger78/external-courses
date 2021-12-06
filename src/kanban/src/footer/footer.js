@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/extensions
-const tasksCounterObj = await import('../utils/footer/tasksCounter.js');
+const tasksCounterObj = await import('./tasksCounter.js');
 const tasksCounter = tasksCounterObj.tasksCounter;
 const footer = document.getElementById('footer');
 

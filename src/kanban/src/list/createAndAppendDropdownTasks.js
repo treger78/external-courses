@@ -1,4 +1,4 @@
-function createAndAppendDropdownTasks(targetListIndexParam, previousListIndexParam) {
+export function createAndAppendDropdownTasks(targetListIndexParam, previousListIndexParam) {
   const listTasks = document.getElementsByClassName('listTasks')[targetListIndexParam];
   const dropdownTasks = document.createElement('select');
 
@@ -31,5 +31,3 @@ function createAndAppendDropdownTasks(targetListIndexParam, previousListIndexPar
 
   return { dropdownTasks, previousListTasks };
 }
-
-export { createAndAppendDropdownTasks };

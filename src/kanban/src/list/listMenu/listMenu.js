@@ -1,8 +1,6 @@
-function ListMenu(listMenu) {
+export function ListMenu(listMenu) {
   this.listMenu = listMenu;
   this.isActiveListMenu = false;
-
-  // this.getListMenu = () => this.listMenu;
 
   this.generateListMenu = () => {
     this.listMenu.insertAdjacentHTML(
@@ -22,5 +20,3 @@ function ListMenu(listMenu) {
     this.isActiveListMenu = false;
   };
 }
-
-export { ListMenu };
